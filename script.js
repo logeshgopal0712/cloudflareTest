@@ -400,6 +400,12 @@ function safeHttpUrl(value) {
 
 function safeAssetUrl(value) {
   if (!value) return "";
+  if (
+    typeof value === "string" &&
+    /^data:image\/(?:png|jpeg|webp|gif);base64,[a-z0-9+/=\s]+$/i.test(value)
+  ) {
+    return value;
+  }
   try {
     const url = new URL(value, window.location.href);
     return ["http:", "https:"].includes(url.protocol) ? url.href : "";
@@ -409,6 +415,7 @@ function safeAssetUrl(value) {
 }
 
 let currentCompanyData = null;
+let currentSiteData = null;
 
 function companyInitials(companyName) {
   return String(companyName)
@@ -441,7 +448,9 @@ function applyCompanyData(company) {
     element.textContent = String(company.about || "");
   });
 
-  const logoUrl = safeAssetUrl(company.logo);
+  const logoUrl = safeAssetUrl(
+    company.logo_src || company.logo_path || company.logo,
+  );
   const initials = companyInitials(companyName);
   document.querySelectorAll("[data-company-logo-slot]").forEach((slot) => {
     const variant = slot.dataset.logoVariant;
@@ -514,11 +523,6 @@ function applyCompanyData(company) {
   if (description) {
     description.content = String(company.description || "");
   }
-}
-
-async function loadCompanyData() {
-  const company = await loadJson("data/company/company.json");
-  applyCompanyData(company);
 }
 
 function normalizeHexColor(value) {
@@ -641,7 +645,11 @@ function applyTemplateData(template) {
       ? `radial-gradient(circle at 12% 28%, color-mix(in srgb, var(--brand) 48%, transparent), transparent 30rem), radial-gradient(circle at 88% 72%, color-mix(in srgb, var(--secondary-light) 45%, transparent), transparent 34rem), linear-gradient(135deg, var(--secondary-dark), var(--secondary), var(--brand-dark))`
       : paper;
 
-  const backgroundImage = safeAssetUrl(template.backgroundImage);
+  const backgroundImage = safeAssetUrl(
+    template.background_image_src ||
+      template.background_image_path ||
+      template.backgroundImage,
+  );
   const heroBackground = backgroundImage
     ? `linear-gradient(${rgbaHexColor(secondary || "#172238", 72)}, ${rgbaHexColor(secondary || "#172238", 72)}), url("${backgroundImage.replaceAll('"', '\\"')}") center center / cover no-repeat`
     : "radial-gradient(circle at 82% 42%, color-mix(in srgb, var(--brand) 28%, transparent), transparent 26rem), linear-gradient(135deg, var(--secondary-dark), var(--secondary) 58%, var(--secondary-dark))";
@@ -672,7 +680,7 @@ function applyTemplateData(template) {
       .join(",");
   }
   document.querySelectorAll("[data-services-heading]").forEach((heading) => {
-    heading.textContent = String(template.servicesHeading || "Services");
+    heading.textContent = String(template.servicesHeading || "What we offer");
   });
   document.querySelectorAll("#service-list").forEach((list) => {
     const horizontal = template.servicesLayout === "horizontal";
@@ -830,19 +838,19 @@ function updateSocialStripVisibility() {
   });
 }
 
-async function loadRuntimeSettings() {
-  const [social, contact, review, template] = await Promise.all([
-    loadJson("data/socialMedia/socialMedia.json"),
-    loadJson("data/contact/contact.json"),
-    loadJson("data/reviews/settings.json"),
-    loadJson("data/template/template.json"),
-  ]);
+function applyRuntimeSettings(siteData) {
+  const social = siteData.socialMedia || {};
+  const contact = siteData.contact || {};
+  const review = siteData.reviewSettings || {};
+  const template = {
+    ...(siteData.template || {}),
+    appointmentUrl: siteData.appointment?.url || "",
+  };
   applySocialMediaData(social);
   applyContactData(contact);
   updateFormSettings("review", review);
   applyTemplateData(template);
   updateSocialStripVisibility();
-  return { social, contact, review, template };
 }
 
 function youtubeEmbedUrl(value) {
@@ -886,18 +894,19 @@ function renderServiceMedia(service) {
     }
     return `<div class="service-media service-video"><iframe src="${escapeHtml(video)}" title="${escapeHtml(service.title)} video" loading="lazy" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
   }
-  const image = safeAssetUrl(service.image);
+  const image = safeAssetUrl(
+    service.image_src || service.image_path || service.image,
+  );
   return image
     ? `<div class="service-media"><img src="${escapeHtml(image)}" alt="${escapeHtml(service.title)}" loading="lazy" /></div>`
     : "";
 }
 
-async function renderServices() {
+async function renderServices(services = currentSiteData?.services) {
   const list = document.querySelector("#service-list");
   const status = document.querySelector("#services-status");
   if (!list) return;
   try {
-    const services = await loadJson("data/services/services.json");
     if (!Array.isArray(services)) throw new Error("services.json must contain a list.");
     list.innerHTML = services
       .map(
@@ -932,12 +941,11 @@ async function renderServices() {
   }
 }
 
-async function renderReviews() {
+async function renderReviews(reviews = currentSiteData?.reviews) {
   const list = document.querySelector("#review-list");
   const status = document.querySelector("#reviews-status");
   if (!list) return;
   try {
-    const reviews = await loadJson("data/reviews/reviews.json");
     if (!Array.isArray(reviews)) throw new Error("reviews.json must contain a list.");
     if (reviews.length === 0) {
       status.textContent = "No reviews.";
@@ -986,22 +994,24 @@ function formatReviewDate(value) {
   }).format(date);
 }
 
-async function renderGallery() {
+async function renderGallery(images = currentSiteData?.gallery) {
   const list = document.querySelector("#gallery-list");
   const status = document.querySelector("#gallery-status");
   if (!list) return;
   try {
-    const images = await loadJson("data/gallery/gallery.json");
     if (!Array.isArray(images)) throw new Error("gallery.json must contain a list.");
     list.innerHTML = images
-      .map(
-        (image) => `
+      .map((image) => {
+        const imageUrl = safeAssetUrl(
+          image.image_src || image.image_path || image.src,
+        );
+        return `
           <figure>
-            <button class="gallery-lightbox-trigger" type="button" data-gallery-open data-gallery-src="${escapeHtml(image.src)}" aria-label="View full image">
-              <img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || `${currentCompanyData?.companyName || "Company"} gallery image`)}" loading="lazy" />
+            <button class="gallery-lightbox-trigger" type="button" data-gallery-open data-gallery-src="${escapeHtml(imageUrl)}" aria-label="View full image">
+              <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(image.alt || `${currentCompanyData?.companyName || "Company"} gallery image`)}" loading="lazy" />
             </button>
-          </figure>`,
-      )
+          </figure>`;
+      })
       .join("");
     status.hidden = true;
   } catch (error) {
@@ -1125,32 +1135,26 @@ function initializeHomeNavigation() {
 }
 
 async function initializeDataPages() {
-  const companyDataPromise = loadCompanyData().then(
-    () => null,
-    (error) => error,
-  );
-  let runtimeSettings = null;
   try {
-    runtimeSettings = await loadRuntimeSettings();
+    const siteData = await loadJson("data/data.json");
+    if (!siteData || typeof siteData !== "object" || Array.isArray(siteData)) {
+      throw new Error("data.json must contain a website data object.");
+    }
+    currentSiteData = siteData;
+    applyCompanyData(siteData.company);
+    applyRuntimeSettings(siteData);
+    await loadHomeSections();
+    applyCompanyData(siteData.company);
+    applyRuntimeSettings(siteData);
+    await Promise.all([
+      renderServices(siteData.services),
+      renderReviews(siteData.reviews),
+      renderGallery(siteData.gallery),
+    ]);
   } catch (error) {
     showFormToast(error.message, true);
   }
-  await loadHomeSections();
-  const companyDataError = await companyDataPromise;
-  if (companyDataError) {
-    showFormToast(companyDataError.message, true);
-  } else if (currentCompanyData) {
-    applyCompanyData(currentCompanyData);
-  }
-  if (runtimeSettings) {
-    applySocialMediaData(runtimeSettings.social);
-    applyContactData(runtimeSettings.contact);
-    updateFormSettings("review", runtimeSettings.review);
-    applyTemplateData(runtimeSettings.template);
-    updateSocialStripVisibility();
-  }
   await initializeWeb3FormsCaptcha();
-  await Promise.all([renderServices(), renderReviews(), renderGallery()]);
   initializeReviewForms();
   initializeCarousels();
   initializeHomeNavigation();
