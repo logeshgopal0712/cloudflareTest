@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "company": {
+    "companyName": "ashly",
+    "yearStarted": 2026,
+    "tagline": "awesome brand ",
+    "description": "hi how are you",
+    "about": "we are awesome ",
+    "logo_path": "",
+    "logo_src": ""
+  },
+  "template": {
+    "templateId": "logo-left",
+    "primaryColor": "#efcaff",
+    "secondaryColor": "#f2f7b7",
+    "usePageColor": true,
+    "pageColor": "#ffecd4",
+    "transparentPageColor": true,
+    "pageColorOpacity": 70,
+    "font": "modern",
+    "background_image_path": "data/background/background.png",
+    "servicesHeading": "breathing",
+    "servicesLayout": "vertical",
+    "sections": {
+      "about": true,
+      "services": true,
+      "gallery": true,
+      "reviews": false,
+      "contact": true,
+      "appointment": false
+    }
+  },
+  "services": [
+    {
+      "title": "1:1 coaching",
+      "description": "work closely",
+      "price": "100$",
+      "link": "",
+      "paymentLink": "",
+      "video": "https://youtu.be/baIVJDFMUoQ?is=IqHNGAL9Ru4T7Syz",
+      "image_path": "data/service/service-01.jpg"
+    }
+  ],
+  "gallery": [
+    {
+      "image_path": "data/gallery/gallery-01.png",
+      "alt": ""
+    },
+    {
+      "image_path": "data/gallery/gallery-02.png",
+      "alt": ""
+    },
+    {
+      "image_path": "data/gallery/gallery-03.jpg",
+      "alt": ""
+    },
+    {
+      "image_path": "data/gallery/gallery-04.jpg",
+      "alt": ""
+    }
+  ],
+  "reviews": [],
+  "contact": {
+    "formEndpoint": "https://api.web3forms.com/submit",
+    "accessKey": "",
+    "email": "aswy@email.com",
+    "phone": "",
+    "address": "",
+    "showCall": false,
+    "showEmail": false
+  },
+  "reviewSettings": {
+    "formEndpoint": "https://api.web3forms.com/submit",
+    "accessKey": ""
+  },
+  "socialMedia": {
+    "instagram": "",
+    "facebook": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "applePodcast": "",
+    "spotify": ""
+  },
+  "appointment": {
+    "url": ""
+  }
+}
