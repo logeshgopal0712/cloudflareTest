@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "company": {
+    "companyName": "BlA2",
+    "yearStarted": 2026,
+    "tagline": "Jsbsj ",
+    "description": "Jsbsj ",
+    "about": "",
+    "logo_path": "data/company/logo.jpg"
+  },
+  "template": {
+    "templateId": "logo-left",
+    "primaryColor": "#c79245",
+    "secondaryColor": "#172238",
+    "usePageColor": false,
+    "pageColor": "#fbfaf7",
+    "transparentPageColor": false,
+    "pageColorOpacity": 70,
+    "font": "modern",
+    "background_image_path": "data/background/background.jpg",
+    "servicesHeading": "Goals",
+    "servicesLayout": "horizontal",
+    "sections": {
+      "about": false,
+      "services": true,
+      "gallery": true,
+      "reviews": false,
+      "contact": true,
+      "appointment": false
+    }
+  },
+  "services": [
+    {
+      "title": "Goal1",
+      "description": "",
+      "price": "",
+      "link": "",
+      "paymentLink": "",
+      "video": "",
+      "image_path": "",
+      "image_src": ""
+    }
+  ],
+  "gallery": [
+    {
+      "image_path": "data/gallery/gallery-01.jpg",
+      "alt": ""
+    }
+  ],
+  "reviews": [],
+  "contact": {
+    "formEndpoint": "https://api.web3forms.com/submit",
+    "accessKey": "",
+    "email": "gmaol@gmail.com",
+    "phone": "",
+    "address": "",
+    "showCall": false,
+    "showEmail": false
+  },
+  "reviewSettings": {
+    "formEndpoint": "https://api.web3forms.com/submit",
+    "accessKey": ""
+  },
+  "socialMedia": {
+    "instagram": "",
+    "facebook": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "applePodcast": "",
+    "spotify": ""
+  },
+  "appointment": {
+    "url": ""
+  }
+}
