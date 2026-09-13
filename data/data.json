@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "company": {
+    "companyName": "Ayla Studio",
+    "yearStarted": 2026,
+    "tagline": "Ayla is cute girl",
+    "description": "Ayla is strong\nAyla is awesome\nAyla is charming\nAyla is beautiful!!!!!!",
+    "about": "We are awesome people",
+    "logo_path": "data/company/logo.jpg"
+  },
+  "template": {
+    "templateId": "centered",
+    "primaryColor": "#c79245",
+    "secondaryColor": "#172238",
+    "usePageColor": false,
+    "pageColor": "#fbfaf7",
+    "transparentPageColor": false,
+    "pageColorOpacity": 70,
+    "font": "modern",
+    "background_image_path": "data/background/background.jpg",
+    "servicesHeading": "Courses",
+    "servicesLayout": "vertical",
+    "sections": {
+      "about": true,
+      "services": true,
+      "gallery": true,
+      "reviews": false,
+      "contact": true,
+      "appointment": true
+    }
+  },
+  "services": [
+    {
+      "title": "Meditation",
+      "description": "Do meditation daily!",
+      "price": "12",
+      "link": "",
+      "paymentLink": "",
+      "video": "",
+      "image_path": "data/service/service-01.jpg"
+    },
+    {
+      "title": "Yoga",
+      "description": "Yoga in death valley",
+      "price": "13",
+      "link": "",
+      "paymentLink": "",
+      "video": "",
+      "image_path": "data/service/service-02.jpg"
+    }
+  ],
+  "gallery": [
+    {
+      "image_path": "data/gallery/gallery-01.jpg",
+      "alt": ""
+    },
+    {
+      "image_path": "data/gallery/gallery-02.jpg",
+      "alt": ""
+    }
+  ],
+  "reviews": [],
+  "contact": {
+    "formEndpoint": "https://api.web3forms.com/submit",
+    "accessKey": "",
+    "email": "ayla@ayla.com",
+    "phone": "",
+    "address": "Redmond, WA, 98052",
+    "showCall": false,
+    "showEmail": false
+  },
+  "reviewSettings": {
+    "formEndpoint": "https://api.web3forms.com/submit",
+    "accessKey": ""
+  },
+  "socialMedia": {
+    "instagram": "https://www.instagram.com/chosenalignment/",
+    "facebook": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "applePodcast": "",
+    "spotify": ""
+  },
+  "appointment": {
+    "url": "https://calendly.com/logeshgopal0712"
+  }
+}
