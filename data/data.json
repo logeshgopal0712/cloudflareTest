@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "company": {
+    "companyName": "computer company",
+    "yearStarted": 2026,
+    "tagline": "",
+    "description": "",
+    "about": "",
+    "logo_path": "data/company/logo.jpg"
+  },
+  "template": {
+    "templateId": "logo-left",
+    "primaryColor": "#c79245",
+    "secondaryColor": "#172238",
+    "usePageColor": false,
+    "pageColor": "#fbfaf7",
+    "transparentPageColor": false,
+    "pageColorOpacity": 70,
+    "font": "modern",
+    "background_image_path": "data/background/background.png",
+    "servicesHeading": "What we offer",
+    "servicesLayout": "horizontal",
+    "sections": {
+      "about": false,
+      "services": true,
+      "gallery": true,
+      "reviews": false,
+      "contact": true,
+      "appointment": false
+    }
+  },
+  "services": [
+    {
+      "title": "Development",
+      "description": "",
+      "price": "",
+      "link": "",
+      "paymentLink": "",
+      "video": "",
+      "image_path": "",
+      "image_src": ""
+    }
+  ],
+  "gallery": [
+    {
+      "image_path": "data/gallery/gallery-01.jpg",
+      "alt": ""
+    },
+    {
+      "image_path": "data/gallery/gallery-02.jpg",
+      "alt": ""
+    },
+    {
+      "image_path": "data/gallery/gallery-03.png",
+      "alt": ""
+    }
+  ],
+  "reviews": [],
+  "contact": {
+    "formEndpoint": "https://api.web3forms.com/submit",
+    "accessKey": "",
+    "email": "test@test.com",
+    "phone": "",
+    "address": "",
+    "showCall": false,
+    "showEmail": false
+  },
+  "reviewSettings": {
+    "formEndpoint": "https://api.web3forms.com/submit",
+    "accessKey": ""
+  },
+  "socialMedia": {
+    "instagram": "",
+    "facebook": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "applePodcast": "",
+    "spotify": ""
+  },
+  "appointment": {
+    "url": ""
+  }
+}
