@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "company": {
+    "companyName": "computer company",
+    "yearStarted": 2026,
+    "tagline": "",
+    "description": "",
+    "about": "",
+    "image_id": "",
+    "image_path": "",
+    "image_src": "",
+    "image_thumbnail": ""
+  },
+  "template": {
+    "templateId": "logo-left",
+    "primaryColor": "#c79245",
+    "secondaryColor": "#172238",
+    "usePageColor": false,
+    "pageColor": "#fbfaf7",
+    "transparentPageColor": false,
+    "pageColorOpacity": 70,
+    "font": "modern",
+    "background_image_id": "",
+    "background_image_path": "",
+    "background_image_src": "",
+    "background_image_thumbnail": "",
+    "servicesHeading": "What we offer",
+    "servicesLayout": "horizontal",
+    "sections": {
+      "about": false,
+      "services": true,
+      "gallery": false,
+      "reviews": false,
+      "contact": true,
+      "appointment": false
+    }
+  },
+  "services": [
+    {
+      "title": "AA",
+      "description": "",
+      "price": "",
+      "link": "",
+      "paymentLink": "",
+      "video": "",
+      "image_id": "",
+      "image_path": "",
+      "image_src": "",
+      "image_thumbnail": ""
+    }
+  ],
+  "gallery": [],
+  "reviews": [],
+  "contact": {
+    "formEndpoint": "https://api.web3forms.com/submit",
+    "accessKey": "",
+    "email": "test2@test2.com",
+    "phone": "",
+    "address": "",
+    "showCall": false,
+    "showEmail": false
+  },
+  "reviewSettings": {
+    "formEndpoint": "https://api.web3forms.com/submit",
+    "accessKey": ""
+  },
+  "socialMedia": {
+    "instagram": "",
+    "facebook": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "applePodcast": "",
+    "spotify": ""
+  },
+  "appointment": {
+    "url": ""
+  }
+}
