@@ -6,7 +6,10 @@
     "tagline": "",
     "description": "",
     "about": "",
-    "logo_path": "data/company/logo.jpg"
+    "image_id": "",
+    "image_path": "",
+    "image_src": "",
+    "image_thumbnail": ""
   },
   "template": {
     "templateId": "logo-left",
@@ -17,13 +20,16 @@
     "transparentPageColor": false,
     "pageColorOpacity": 70,
     "font": "modern",
-    "background_image_path": "data/background/background.png",
+    "background_image_id": "",
+    "background_image_path": "",
+    "background_image_src": "",
+    "background_image_thumbnail": "",
     "servicesHeading": "What we offer",
     "servicesLayout": "horizontal",
     "sections": {
       "about": false,
       "services": true,
-      "gallery": true,
+      "gallery": false,
       "reviews": false,
       "contact": true,
       "appointment": false
@@ -31,40 +37,25 @@
   },
   "services": [
     {
-      "title": "development",
+      "title": "AA",
       "description": "",
       "price": "",
       "link": "",
       "paymentLink": "",
       "video": "",
+      "image_id": "",
       "image_path": "",
-      "image_src": ""
+      "image_src": "",
+      "image_thumbnail": ""
     }
   ],
-  "gallery": [
-    {
-      "image_path": "data/gallery/gallery-01.jpg",
-      "alt": ""
-    },
-    {
-      "image_path": "data/gallery/gallery-02.jpg",
-      "alt": ""
-    },
-    {
-      "image_path": "data/gallery/gallery-03.jpg",
-      "alt": ""
-    },
-    {
-      "image_path": "data/gallery/gallery-04.jpg",
-      "alt": ""
-    }
-  ],
+  "gallery": [],
   "reviews": [],
   "contact": {
     "formEndpoint": "https://api.web3forms.com/submit",
     "accessKey": "",
     "email": "com2@com2.com",
-    "phone": "+19099099292",
+    "phone": "",
     "address": "",
     "showCall": false,
     "showEmail": false
