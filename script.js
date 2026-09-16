@@ -448,9 +448,7 @@ function applyCompanyData(company) {
     element.textContent = String(company.about || "");
   });
 
-  const logoUrl = safeAssetUrl(
-    company.logo_src || company.logo_path || company.logo,
-  );
+  const logoUrl = safeAssetUrl(company.image_src || company.image_path);
   const initials = companyInitials(companyName);
   document.querySelectorAll("[data-company-logo-slot]").forEach((slot) => {
     const variant = slot.dataset.logoVariant;
@@ -646,9 +644,7 @@ function applyTemplateData(template) {
       : paper;
 
   const backgroundImage = safeAssetUrl(
-    template.background_image_src ||
-      template.background_image_path ||
-      template.backgroundImage,
+    template.background_image_src || template.background_image_path,
   );
   const heroBackground = backgroundImage
     ? `linear-gradient(${rgbaHexColor(secondary || "#172238", 72)}, ${rgbaHexColor(secondary || "#172238", 72)}), url("${backgroundImage.replaceAll('"', '\\"')}") center center / cover no-repeat`
@@ -894,9 +890,7 @@ function renderServiceMedia(service) {
     }
     return `<div class="service-media service-video"><iframe src="${escapeHtml(video)}" title="${escapeHtml(service.title)} video" loading="lazy" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
   }
-  const image = safeAssetUrl(
-    service.image_src || service.image_path || service.image,
-  );
+  const image = safeAssetUrl(service.image_src || service.image_path);
   return image
     ? `<div class="service-media"><img src="${escapeHtml(image)}" alt="${escapeHtml(service.title)}" loading="lazy" /></div>`
     : "";
@@ -909,15 +903,30 @@ async function renderServices(services = currentSiteData?.services) {
   try {
     if (!Array.isArray(services)) throw new Error("services.json must contain a list.");
     list.innerHTML = services
-      .map(
-        (service, index) => `
-          <article class="service-card">
+      .map((service, index) => {
+        const titleOnly =
+          Boolean(String(service.title || "").trim()) &&
+          ![
+            service.description,
+            service.price,
+            service.link,
+            service.paymentLink,
+            service.image_src,
+            service.image_path,
+            service.video,
+          ].some(Boolean);
+        const hasFooter =
+          Boolean(service.price) ||
+          Boolean(safeHttpUrl(service.link)) ||
+          Boolean(safeHttpUrl(service.paymentLink));
+        return `
+          <article class="service-card${titleOnly ? " compact-service-card" : ""}">
             ${renderServiceMedia(service)}
             <div class="service-card-content">
               <span class="service-number">${String(index + 1).padStart(2, "0")}</span>
               <h3>${escapeHtml(service.title)}</h3>
-              <p>${escapeHtml(service.description)}</p>
-              <div class="service-card-footer">
+              ${service.description ? `<p>${escapeHtml(service.description)}</p>` : ""}
+              ${hasFooter ? `<div class="service-card-footer">
                 ${service.price ? `<strong class="service-price">${escapeHtml(service.price)}</strong>` : ""}
                 ${
                   safeHttpUrl(service.link)
@@ -929,10 +938,10 @@ async function renderServices(services = currentSiteData?.services) {
                     ? `<a class="service-payment-link" href="${escapeHtml(safeHttpUrl(service.paymentLink))}" target="_blank" rel="noopener noreferrer">Pay now <span aria-hidden="true">↗</span></a>`
                     : ""
                 }
-              </div>
+              </div>` : ""}
             </div>
-          </article>`,
-      )
+          </article>`;
+      })
       .join("");
     status.hidden = true;
   } catch (error) {
@@ -1002,9 +1011,7 @@ async function renderGallery(images = currentSiteData?.gallery) {
     if (!Array.isArray(images)) throw new Error("gallery.json must contain a list.");
     list.innerHTML = images
       .map((image) => {
-        const imageUrl = safeAssetUrl(
-          image.image_src || image.image_path || image.src,
-        );
+        const imageUrl = safeAssetUrl(image.image_src || image.image_path);
         return `
           <figure>
             <button class="gallery-lightbox-trigger" type="button" data-gallery-open data-gallery-src="${escapeHtml(imageUrl)}" aria-label="View full image">
