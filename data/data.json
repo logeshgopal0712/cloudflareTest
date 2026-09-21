@@ -1,20 +1,21 @@
 {
   "schemaVersion": 1,
   "company": {
-    "companyName": "Company",
+    "companyName": "blabla",
+    "yearStarted": 2026,
+    "tagline": "",
+    "description": "",
+    "about": "",
     "image_id": "",
     "image_path": "",
     "image_src": "",
-    "image_thumbnail": "",
-    "yearStarted": "",
-    "tagline": "",
-    "description": "",
-    "about": ""
+    "image_thumbnail": ""
   },
   "template": {
     "templateId": "logo-left",
     "primaryColor": "#c79245",
     "secondaryColor": "#172238",
+    "headerTextColor": "light",
     "usePageColor": false,
     "pageColor": "#fbfaf7",
     "transparentPageColor": false,
@@ -28,20 +29,33 @@
     "servicesLayout": "horizontal",
     "sections": {
       "about": false,
-      "services": false,
+      "services": true,
       "gallery": false,
       "reviews": false,
-      "contact": false,
+      "contact": true,
       "appointment": false
     }
   },
-  "services": [],
+  "services": [
+    {
+      "title": "asdfasdf",
+      "description": "",
+      "price": "",
+      "link": "",
+      "paymentLink": "",
+      "video": "",
+      "image_id": "",
+      "image_path": "",
+      "image_src": "",
+      "image_thumbnail": ""
+    }
+  ],
   "gallery": [],
   "reviews": [],
   "contact": {
     "formEndpoint": "https://api.web3forms.com/submit",
     "accessKey": "",
-    "email": "",
+    "email": "logeshgopal0712@gmail.com",
     "phone": "",
     "address": "",
     "showCall": false,
