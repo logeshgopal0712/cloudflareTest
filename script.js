@@ -449,6 +449,7 @@ function applyCompanyData(company) {
   });
 
   const logoUrl = safeAssetUrl(company.image_src || company.image_path);
+  document.body.dataset.logoDisplay = logoUrl ? "image" : "text";
   const initials = companyInitials(companyName);
   document.querySelectorAll("[data-company-logo-slot]").forEach((slot) => {
     const variant = slot.dataset.logoVariant;
@@ -593,7 +594,10 @@ function applyTemplateData(template) {
   }
   const primary = normalizeHexColor(template.primaryColor);
   const secondary = normalizeHexColor(template.secondaryColor);
+  const headerTextColor =
+    template.headerTextColor === "dark" ? "dark" : "light";
   const root = document.documentElement.style;
+  document.body.dataset.headerText = headerTextColor;
   if (primary) {
     root.setProperty("--brand", primary);
     root.setProperty("--brand-dark", mixHexColor(primary, "#000000", 0.22));
@@ -646,8 +650,15 @@ function applyTemplateData(template) {
   const backgroundImage = safeAssetUrl(
     template.background_image_src || template.background_image_path,
   );
+  document.body.dataset.headerImage = String(Boolean(backgroundImage));
+  if (backgroundImage) {
+    root.setProperty(
+      "--on-secondary",
+      headerTextColor === "dark" ? "#111827" : "#ffffff",
+    );
+  }
   const heroBackground = backgroundImage
-    ? `linear-gradient(${rgbaHexColor(secondary || "#172238", 72)}, ${rgbaHexColor(secondary || "#172238", 72)}), url("${backgroundImage.replaceAll('"', '\\"')}") center center / cover no-repeat`
+    ? `url("${backgroundImage.replaceAll('"', '\\"')}") center center / cover no-repeat`
     : "radial-gradient(circle at 82% 42%, color-mix(in srgb, var(--brand) 28%, transparent), transparent 26rem), linear-gradient(135deg, var(--secondary-dark), var(--secondary) 58%, var(--secondary-dark))";
   root.setProperty("--hero-background", heroBackground);
 
@@ -930,7 +941,7 @@ async function renderServices(services = currentSiteData?.services) {
                 ${service.price ? `<strong class="service-price">${escapeHtml(service.price)}</strong>` : ""}
                 ${
                   safeHttpUrl(service.link)
-                    ? `<a class="service-link" href="${escapeHtml(safeHttpUrl(service.link))}" target="_blank" rel="noopener noreferrer">View service <span aria-hidden="true">↗</span></a>`
+                    ? `<a class="service-link" href="${escapeHtml(safeHttpUrl(service.link))}" target="_blank" rel="noopener noreferrer">View offering <span aria-hidden="true">↗</span></a>`
                     : ""
                 }
                 ${

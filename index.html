@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=104" />
-    <script src="script.js?v=104" defer></script>
+    <link rel="stylesheet" href="styles.css?v=110" />
+    <script src="script.js?v=110" defer></script>
   </head>
-  <body data-page="index" data-page-title="Company" data-template="logo-left">
+  <body data-page="index" data-page-title="Company" data-template="logo-left" data-header-text="light" data-header-image="false" data-logo-display="text">
     
     <header class="site-header">
       <nav class="nav-shell" aria-label="Main navigation">
@@ -32,7 +32,7 @@
             <a class="secondary-link" href="#about">Learn more <span aria-hidden="true">↓</span></a>
           </div>
         </div>
-        <div class="hero-art"><span class="company-logo-slot" data-company-logo-slot data-logo-variant="hero"><div class="hero-monogram" aria-hidden="true"><span>C</span></div></span></div>
+        <div class="hero-art"><span class="company-logo-slot" data-company-logo-slot data-logo-variant="hero"><div class="hero-monogram" aria-hidden="true"><span>C</span></div></span><strong class="hero-text-logo" data-company-name>Company</strong></div>
       </div>
     </header>
     
@@ -68,7 +68,10 @@
     </aside>
     <footer class="site-footer">
       <a class="brand footer-brand" href="index.html"><span class="company-logo-slot" data-company-logo-slot data-logo-variant="brand"><span class="brand-mark" aria-hidden="true">C</span></span><strong data-company-name>Company</strong></a>
-      <small>© <span id="copyright-years" data-start-year="2026"></span> <span data-company-name>Company</span>. All rights reserved.</small>
+      <div class="footer-meta">
+        <small>© <span id="copyright-years" data-start-year="2026"></span> <span data-company-name>Company</span>. All rights reserved.</small>
+        <small class="gudispace-attribution">Built using <a href="https://gudispace.com/" target="_blank" rel="noopener noreferrer">GudiSpace.com</a></small>
+      </div>
     </footer>
   </body>
 </html>
